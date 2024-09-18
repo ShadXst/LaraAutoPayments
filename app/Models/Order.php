@@ -11,6 +11,16 @@ class Order extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
