@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\PaymentRule;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Order::class)
+                ->constrained()
+                ->cascadeOnDelete();
             $table->foreignIdFor(PaymentRule::class)
                 ->constrained()
                 ->cascadeOnDelete();
