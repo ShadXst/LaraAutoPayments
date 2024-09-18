@@ -1,24 +1,30 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands\AutoPayments;
 
+use App\AutoPayments\Application\UseCases\Contracts\HandleAutoPaymentsServiceInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-final class AutoPaymentsCommand extends Command
+final class RunAutoPaymentsCommand extends Command
 {
     protected $signature = 'auto-payments:run';
 
     protected $description = 'Запустить процесс выполнения автооплаты';
 
-    public function handle(): int
+    public function handle(HandleAutoPaymentsServiceInterface $handleAutoPaymentsService): int
     {
         try {
-            Log::info('Команда выполнена');
+            $handleAutoPaymentsService->handle();
         } catch (Throwable $e) {
-            $this->error('Ошибка при исполнении автооплаты.');
+            Log::critical($e->getTraceAsString(), [
+                'message' => $e->getMessage(),
+            ]);
+
+            $this->error('Ошибка автооплаты.');
 
             return self::FAILURE;
         }

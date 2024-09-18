@@ -1,9 +1,9 @@
 <?php
 
-use App\Console\Commands\AutoPayments\AutoPaymentsCommand;
+use App\Console\Commands\AutoPayments\RunAutoPaymentsCommand;
 use Illuminate\Support\Facades\Schedule;
 
 
-Schedule::command(AutoPaymentsCommand::class)
+Schedule::command(RunAutoPaymentsCommand::class)
     ->everyMinute()
     ->onOneServer();
