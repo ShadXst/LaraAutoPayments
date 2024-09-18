@@ -21,14 +21,14 @@ final readonly class GetRepeatablePaymentOrdersFromEloquentRepository implements
     {
         $periodCheckDate = now()->subDays($rule->period);
         try {
-            Order::query()
-                ->whereDoesntHave('transaction', function (Builder $query) use ($periodCheckDate) {
-                    $query->where('transaction.created_at', '>', $periodCheckDate);
+            return Order::query()
+                ->whereDoesntHave('transactions', function (Builder $query) use ($rule) {
+                    $query->where('transactions.payment_rule_id', $rule->id);
                 })
                 ->where('created_at', '<=', $periodCheckDate)
                 ->get();
         } catch (Throwable $e) {
-            throw new DBException('', 0, $e);
+            throw new DBException('Failed to retrieve repeatable payment orders', 0, $e);
         }
     }
 }
