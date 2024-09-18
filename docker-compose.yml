@@ -1,0 +1,82 @@
+---
+
+networks:
+  auto-payments-network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: containers/app/Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html:rw
+    command: unitd --no-daemon
+    entrypoint: /usr/local/bin/docker-entrypoint.sh
+    ports:
+      - "${HTTP_PORT}:8080"
+    depends_on:
+      - redis
+      - db
+    networks:
+      - auto-payments-network
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  workspace:
+    extends:
+      file: common.yml
+      service: app
+    build:
+      context: .
+      dockerfile: containers/workspace/Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    environment:
+      PHP_IDE_CONFIG: "serverName=localhost"
+    networks:
+      - auto-payments-network
+
+  workers:
+    extends:
+      file: common.yml
+      service: app
+    working_dir: /home/laravel/
+    command: supervisord -n -c /etc/supervisor/supervisord.conf
+    depends_on:
+      - redis
+      - db
+    networks:
+        - auto-payments-network
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+    networks:
+      - auto-payments-network
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - auto-payments-network
+
+volumes:
+  dbdata:
