@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('payment_rules', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->unsignedInteger('delay')->nullable();
+            $table->unsignedInteger('period')->nullable();
             $table->timestamps();
         });
     }
