@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\AutoPayments\Application\Services\Transaction;
+namespace App\AutoPayments\Application\Services\Transactions;
 
-use App\AutoPayments\Application\Services\Transaction\Contracts\CreateTransactionServiceInterface;
+use App\AutoPayments\Application\Services\Transactions\Contracts\CreateTransactionServiceInterface;
 use App\AutoPayments\Infrastructure\Repositories\SQL\Contracts\CreateTransactionFromOrderRepositoryInterface;
 use App\Models\Order;
 use App\Models\Transaction;

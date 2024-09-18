@@ -6,8 +6,8 @@ namespace App\Providers;
 
 use App\AutoPayments\Application\Services\Orders\Contracts\PaymentOrdersServiceFabricInterface;
 use App\AutoPayments\Application\Services\Orders\PaymentOrdersServiceFabric;
-use App\AutoPayments\Application\Services\Transaction\Contracts\CreateTransactionServiceInterface;
-use App\AutoPayments\Application\Services\Transaction\CreateTransactionService;
+use App\AutoPayments\Application\Services\Transactions\Contracts\CreateTransactionServiceInterface;
+use App\AutoPayments\Application\Services\Transactions\CreateTransactionService;
 use Illuminate\Support\ServiceProvider;
 
 class AutoPaymentsServiceProvider extends ServiceProvider
