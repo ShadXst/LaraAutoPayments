@@ -8,6 +8,7 @@ use App\AutoPayments\Application\Services\Transaction\Contracts\CreateTransactio
 use App\AutoPayments\Infrastructure\Repositories\SQL\Contracts\CreateTransactionFromOrderRepositoryInterface;
 use App\Models\Order;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 final readonly class CreateTransactionService implements CreateTransactionServiceInterface
@@ -22,6 +23,8 @@ final readonly class CreateTransactionService implements CreateTransactionServic
     {
         try {
             $this->createTransactionFromOrderRepository->create($order);
+
+            Log::info('Транзакция успешно создана');
         } catch (Throwable $e) {
             // throw Application exception
         }

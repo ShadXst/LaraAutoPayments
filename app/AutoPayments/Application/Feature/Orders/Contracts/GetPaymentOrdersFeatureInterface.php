@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AutoPayments\Application\Feature\Contracts;
+namespace App\AutoPayments\Application\Feature\Orders\Contracts;
 
 use Illuminate\Support\Collection;
 

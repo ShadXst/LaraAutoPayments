@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\AutoPayments\Application\Feature\Contracts\GetPaymentOrdersFeatureInterface;
+use App\AutoPayments\Application\Feature\Orders\Contracts\GetPaymentOrdersFeatureInterface;
 use App\AutoPayments\Application\Feature\Orders\GetPaymentOrdersFeature;
 use Illuminate\Support\ServiceProvider;
 

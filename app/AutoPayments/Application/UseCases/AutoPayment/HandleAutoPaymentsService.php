@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\AutoPayments\Application\UseCases\AutoPayment;
 
-use App\AutoPayments\Application\Feature\Contracts\GetPaymentOrdersFeatureInterface;
+use App\AutoPayments\Application\Feature\Orders\Contracts\GetPaymentOrdersFeatureInterface;
 use App\AutoPayments\Application\Services\Transaction\Contracts\CreateTransactionServiceInterface;
 use App\AutoPayments\Application\UseCases\Contracts\HandleAutoPaymentsServiceInterface;
 use Throwable;
