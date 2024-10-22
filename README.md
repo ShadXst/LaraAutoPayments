@@ -3,6 +3,10 @@
 The auto payments application based on the Laravel Framework.
 Auto payment are implemented in the form of Scheduled Command for those, who scared of Queues and Cache.
 
+## Available ReadMe:
+- [English](README.md)
+- [Russian](README.ru.md)
+
 ##  Install
 > Please, install Makefile before you proceed to the next steps
 - `cp .env.example .env`
