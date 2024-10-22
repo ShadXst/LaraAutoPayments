@@ -1,13 +1,10 @@
 # LaraAutoPayments
 
-## Управление контейнерами
+The auto payments application based on the Laravel Framework.
+Auto payment are implemented in the form of Scheduled Command for those, who scared of Queues and Cache.
 
-- Поднять контейнеры: `make up`
-- Остановить контейнеры: `make down`
-- Зайти в контейнер разработки: `make shell`
-
-## 1 Установка
-- для начала нужны инструменты для работы с Makefile
+##  Install
+> Please, install Makefile before you proceed to the next steps
 - `cp .env.example .env`
 - `make up`
 - `make shell`
@@ -17,6 +14,12 @@
 - `migrate`
 - `seed`
 
-## 2 Приложение
-- приложение доступно по адресу http://localhost на 80 порту
-- для подключения xDebug наружу смотрит порт 9003
+## Docker control
+
+- Run docker containers: `make up`
+- Stop all containers: `make down`
+- Got to Dev-container shell: `make shell`
+
+##  App and Debugging
+- the app is available at http://localhost at the port 80
+- to debug your app, xDebug has exposed port 9003
